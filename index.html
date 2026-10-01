@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Help</title>
+<title>RGB Party</title>
 <style>
   html, body { height: 100%; margin: 0; overflow: hidden; font-family: system-ui, sans-serif; }
   body { background: hsl(0 100% 50%); transition: background-color 1s linear; }
@@ -53,7 +53,7 @@
 <img id="gif" src="move.gif" alt="gif">
 <audio id="song" src="song.m4a" loop></audio>
 
-<button id="start">▶ Click to See</button>
+<button id="start">▶ Click to see</button>
 
 <script>
   var hue = 0;
@@ -63,8 +63,14 @@
   }, 1000);
 
   document.getElementById("start").onclick = function () {
-    document.getElementById("song").play().catch(function () {});
-    this.style.display = "none";
+    var btn = this;
+    var audio = document.getElementById("song");
+    audio.play().then(function () {
+      btn.style.display = "none";
+    }).catch(function (err) {
+      alert("Song could not play: " + err.message + "\nCheck that song.mp3 is uploaded with that exact name next to index.html.");
+      btn.style.display = "none";
+    });
   };
 </script>
 </body>
