@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Help</title>
+<style>
+  html, body { height: 100%; margin: 0; overflow: hidden; font-family: system-ui, sans-serif; }
+  body { background: hsl(0 100% 50%); transition: background-color 1s linear; }
+
+  #title {
+    position: fixed; top: 4vh; left: 0; right: 0; text-align: center;
+    margin: 0; padding: 0 16px; z-index: 2;
+    font-size: clamp(24px, 6vw, 56px); font-weight: 800; color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,.6);
+  }
+
+  #photo {
+    position: fixed; top: 50%; left: 50%;
+    width: min(55vw, 55vh); height: min(55vw, 55vh);
+    object-fit: cover; border-radius: 24px;
+    transform: translate(-50%, -50%);
+    animation: breathe 1s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(255,255,255,.6);
+  }
+  @keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50%      { transform: translate(-50%, -50%) scale(1.15); }
+  }
+
+  #gif {
+    position: fixed; bottom: 8vh; left: 0; height: 18vh; width: auto;
+    animation: fly 6s linear infinite;
+  }
+  @keyframes fly {
+    from { transform: translateX(100vw); }
+    to   { transform: translateX(-100%); }
+  }
+
+  #start {
+    position: fixed; inset: 0; z-index: 10; border: 0; cursor: pointer;
+    background: #000; color: #fff; font-size: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Change this text -->
+<h1 id="title">Bhai ka Birthday</h1>
+
+<!-- Put these 3 files in the same folder as index.html (or change the names) -->
+<img id="photo" src="photo.jpg" alt="photo">
+<img id="gif" src="move.gif" alt="gif">
+<audio id="song" src="song.mp3" loop></audio>
+
+<button id="start">▶ Click to See</button>
+
+<script>
+  var hue = 0;
+  setInterval(function () {
+    hue = (hue + 40) % 360;
+    document.body.style.backgroundColor = "hsl(" + hue + " 100% 50%)";
+  }, 1000);
+
+  document.getElementById("start").onclick = function () {
+    document.getElementById("song").play().catch(function () {});
+    this.style.display = "none";
+  };
+</script>
+</body>
+</html>
